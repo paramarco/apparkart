@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Template xmlns="http://wirecloud.conwet.fi.upm.es/ns/template#">
+    <Catalog.ResourceDescription>
+        <Vendor>InstalTIC SL</Vendor>
+        <Name>Apparkart</Name>
+        <DisplayName>Apparkart</DisplayName>
+        <Version>2.5.3</Version>
+	    <Author>mvereda</Author>
+        <Mail>paramarco@gmail.com</Mail>
+        <Description>Apparkart tells you where to park</Description>
+        <ImageURI>img/coche.png</ImageURI>
+        <iPhoneImageURI>img/coche.png</iPhoneImageURI>
+        <WikiURI></WikiURI>
+    </Catalog.ResourceDescription>
+    <Platform.Preferences>
+     </Platform.Preferences>
+    <Platform.StateProperties>
+    </Platform.StateProperties>
+
+    <Platform.Wiring>
+        <OutputEndpoint
+            name="putRoute"
+            type="text"
+            description="Change bounds of the current route."
+            label="Change route"
+            action_label="Apparkart: Change Bounds of Route"
+            friendcode="route"/>
+    </Platform.Wiring>
+
+    <Platform.Link>
+        <XHTML
+            href="index.html"
+            contenttype="text/html"
+            cacheable="false"
+            use-platform-style="false"/>
+    </Platform.Link>
+
+    <Platform.Rendering width="7" height="50"/>
+</Template>

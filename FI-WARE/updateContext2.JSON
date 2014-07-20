@@ -1,0 +1,29 @@
+{
+    "contextElements": {
+        "contextElement": {
+            "type": "ParkingMeter",
+            "isPattern": "false",
+            "id": "ParkingMeter-1",
+            "attributes": [
+            {
+                "name": "numberOfFreePlaces",
+                "type": "number",
+                "value": "3"
+            }            
+            ]
+        },
+        "contextElement": {
+            "type": "ParkingMeter",
+            "isPattern": "false",
+            "id": "ParkingMeter-2",
+            "attributes": [            
+            {
+                "name": "numberOfFreePlaces",
+                "type": "number",
+                "value": "4"
+            }                       
+            ]
+        }
+    },
+    "updateAction": "UPDATE"
+}

@@ -1,0 +1,41 @@
+{
+    "contextElements": {
+        "contextElement": {
+            "type": "ParkingMeter",
+            "isPattern": "false",
+            "id": "ParkingMeter-1",
+            "attributes": [
+            {
+                "name": "numberOfFreePlaces",
+                "type": "number",
+                "value": "2"
+            }            
+            ]
+        },
+        "contextElement": {
+            "type": "ParkingMeter",
+            "isPattern": "false",
+            "id": "ParkingMeter-2",
+            "attributes": [            
+            {
+                "name": "numberOfFreePlaces",
+                "type": "number",
+                "value": "2"
+            }                       
+            ]
+        },
+ "contextElement": {
+            "type": "ParkingMeter",
+            "isPattern": "false",
+            "id": "ParkingMeter-carriots",
+            "attributes": [            
+            {
+                "name": "numberOfFreePlaces",
+                "type": "number",
+                "value": "1"
+            }                       
+            ]
+        }
+    },
+    "updateAction": "UPDATE"
+}

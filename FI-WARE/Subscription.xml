@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subscribeContextRequest>
+  <entityIdList>
+    <entityId type="ParkingMeter" isPattern="true">
+      <id>ParkingMeter*</id>
+    </entityId>
+  </entityIdList>
+  <attributeList>
+    <attribute>numberOfFreePlaces</attribute>
+  </attributeList>
+  <reference>http://130.206.83.60:8081/notify</reference>
+  <duration>P1M</duration>
+  <notifyConditions>
+    <notifyCondition>
+      <type>ONCHANGE</type>
+      <condValueList>
+        <condValue>numberOfFreePlaces</condValue>
+      </condValueList>
+    </notifyCondition>
+  </notifyConditions>
+  <throttling>PT5S</throttling>
+</subscribeContextRequest>
