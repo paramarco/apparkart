@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,	width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<link rel="stylesheet" href="css/lungo.css">
+	    <link rel="stylesheet" href="css/lungo.icon.css">
+	    <link rel="stylesheet" href="css/lungo.icon.brand.css">
+	    <link rel="stylesheet" href="css/lungo.css">
+	    <link rel="stylesheet" href="css/theme.lungo.css">
+	    <link rel="stylesheet" type="text/css" href="css/index.css" /> 
+          
+	     <!-- Cordova - Dependencies  
+		<script type="text/javascript" src="cordova-2.6.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="json2.js"></script>
+        -->	    
+	    <!-- app - Dependencies -->
+	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	    <script type="text/javascript" src="js/dictionary.js"></script>
+	    <script type="text/javascript" src="js/index.js"></script>	    
+	    <!-- Lungo - Dependencies -->
+		<script type="text/javascript" src="js/quo.js"></script>
+		<script type="text/javascript" src="js/lungo.js"></script>
+	    <!-- Google - Dependencies  -->
+	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+		<script type="text/javascript" src="js/googlemaps.js"></script> 
+	    
+		
+	    <title> ApparKart </title>
+    </head>
+       
+	<body class="app">		
+		<script type="text/javascript" charset="utf-8">
+	    	//app.initialize(); 
+	    	//by-passing event handling of Apache Cordova
+        	$(document).ready(app.receivedEvent());
+
+		</script>
+		
+		<section id="main">
+			<article id="index_loading" class="active">	
+	        	<div class="app_apache">
+		     		<div id="deviceready" class="blink">
+		                <p class="event listening">loading </p>			           
+		            </div>
+		            <h1>ApparKart</h1>
+		        </div>  
+	       	</article>	 	
+		</section>		
+
+   		<section id="step2" data-transition="slide"> 
+			<header data-title="Apparkart"> 
+				
+		        <nav class="right">		            
+		            <a href="#features" data-target="aside" data-view-menu="options" data-icon="menu"></a>
+		        </nav>
+			</header>
+			<article id="gallery" class="active list indented scroll">
+		        <ul id="list_gallery">
+		           
+		        </ul>
+		    </article>
+		   </section>
+		   
+		<aside id="features">
+	        <header data-title="Options"></header>
+	        <article class="active list">
+	            <ul>
+	                <li id="resume_options" class="current">
+                		<br> 
+                		<a href="#" data-icon="refresh" > &nbsp;  &nbsp;                     
+                        <strong id="label_Resume_Options">Resume Options</strong>
+                        </a>
+                        <br>                    
+                	</li>
+	                <li id="about_make_it">
+                		<br>
+                		<a href="#" data-icon="info" >&nbsp;  &nbsp;
+                		<strong id="label_About_Make_it">Pay parking </strong>
+                		</a>
+                		<br>                      
+                	</li>
+	                <li id="change_language">
+	                		<br>
+	                		<a href="#" data-icon="chat" > &nbsp;  &nbsp;
+	                		<strong id="label_change_language">Language</strong>
+	                		</a> 
+	                		<br>                     
+	                </li>
+	
+	                <li id="close_application">
+	                		<br>                    
+	                		<a href="#" data-icon="close" >&nbsp;  &nbsp;
+	                        <strong id="label_Close_application">Close application</strong>
+	                        </a> 
+	                        <br>                    
+	                </li>
+	            </ul>
+	        </article>
+    	</aside>
+
+		   
+		   <section id="step3" data-transition="slide">
+			
+			<header >	
+				<nav>
+					<a href="#" id="back_sign_in_widget" data-view-menu="options-icons"  data-icon="left">
+						 
+		            	<strong id="menu_sculpture_settings" style="font-size:25px;">  How to get there</strong>
+					</a>		            
+		        </nav>
+		        <nav class="right">
+		            <a href="#features" data-target="aside" data-view-menu="options" data-icon="menu"></a>
+		        </nav>
+			</header>
+		    <article id="widget" class="active list indented scroll">
+		       	<div id="map_canvas" style="float:left;width:95%;height:95%"> </div>				
+			</article>
+			
+			<article id="checkout"	class="list indented">
+		        <div data-loading=""> </div>        
+
+            </article>	
+			
+		</section> 
+				
+		
+		<section id="about" data-transition="slide">
+			<header>	
+				<nav>
+					<a id="back_sign_in_about" data-view-menu="options-icons"  data-icon="left">
+						 
+		            	<strong id="menu_about" style="font-size:25px;"> Pay parking place</strong>
+					</a>				
+		        </nav>		        
+			</header>
+						
+			<article id="about" class="active list indented scroll text align_center ">			
+					<li class="dark">
+	                	<strong id="step1_label_8">Choose how many hours want you to stay in this parking place</strong>
+	                </li>
+	                <li >
+	                	<small>You've been associated to the parkimeter on: <small>
+	                	<strong id="your_parking"></strong>
+	                </li>
+                    	
+                    <li >	
+                    	<form>								
+				                
+				                <label id="label_number_copies">number of hours:</label>
+				                <label class="select three columns right">
+					                <select id="number_hours" class="custom" onchange="budget()">
+				                        <option  value="1" selected>1</option>
+				                        <option  value="2">2</option>
+				                        <option  value="3">3</option>
+				                        <option  value="4">4</option>
+				                    </select>	
+   				                </label>				                    
+			            	 
+		               			<br><br>                	
+				                <strong id="price_label">Price:</strong>
+				                <strong id="price_amount">0€</strong>               
+								<br>
+						</form>		
+								
+					</li>
+					<li >
+								
+					    		<br>							
+								<small id="router_to_shipping_data">
+							    <img id="boton_paypal"  class="button compra" src="img/btn_buynow_international.gif" >
+							    </small>
+							    <br>
+							    <a href="#about" data-router="section" data-icon="info" class="left"></a>						   
+					    		<small id="label_accept_terms" >I accept the terms and conditions</small>
+					                   		         
+			                			
+					</li>			  					        	
+       		</article>
+       		
+       		
+       		<article id="caca" >			
+					<li class="dark">					
+					  <button id="undo" style="display:block;margin:auto" onclick="undo()">Undo  </button>
+					  <div id="directions_panel" style="width:100%"> </div> 
+					</li>			  					        	
+       		</article>
+			
+		</section>
+		
+		<section id="language" data-transition="slide">
+			<header>	
+				<nav>
+					<a id="back_sign_in_language" data-view-menu="options-icons"  data-icon="left">						 
+		            	<strong id="menu_change_language" style="font-size:25px;">Language</strong>
+					</a>
+		        </nav>
+		        
+			</header>
+						
+			<article id="language_article" class="active list indented scroll text align_center ">
+			 	<ul>
+	                <li class="thumb selectable arrow" onclick="">
+	                    <strong>Deutsch</strong>
+	                    <small></small>
+	                </li>
+	                <li class="thumb selectable arrow" onclick="">
+	                    <strong>English</strong>
+	                    <small></small>
+	                </li>
+	                <li class="thumb selectable arrow" onclick="">
+	                    <strong>Espa&ntilde;ol</strong>
+	                    <small></small>
+	                </li>
+	                <li class="thumb selectable arrow" onclick="">
+	                    <strong>Fran&ccedil;ais</strong>
+	                    <small></small>
+	                </li>
+                	<li class="thumb selectable arrow" onclick="">
+	                    <strong>italiano</strong>
+	                    <small></small>
+	                </li>
+	                
+	                <li class="thumb selectable arrow" onclick="">
+	                    <strong>Portugu&ecirc;s</strong>
+	                    <small></small>
+	                </li>
+	
+	                
+	            </ul>			
+			  					        	
+       		</article>
+			
+		</section>
+
+
+		
+		
+		
+				
+	<!-- Lungo - Sandbox App -->
+	<script type="text/javascript" charset="utf-8">
+		Lungo.init({	name: 'Appkart'	    });	
+		
+		Lungo.dom('#close_application').tap(tap_on_exit);
+		
+		Lungo.dom('[data-target=aside]').tap(function(){   Lungo.View.Aside.toggle("#features");  });	
+        
+        $("#about_make_it").click(function()	{	
+				        	Lungo.View.Aside.hide("#features"); 
+				        	Lungo.Router.section("about");	budget();
+				        	$("#your_parking").html( app.current_address);
+				        	
+				        	        	
+        										});
+        Lungo.dom('#resume_options').tap(function(){	Lungo.View.Aside.hide("#features");	 });	
+		Lungo.dom('#back_sign_in_about').tap(function (){	Lungo.Router.back(); Lungo.View.Aside.hide("#features");  });
+		Lungo.dom('#back_sign_in_language').tap(function (){	Lungo.Router.back(); Lungo.View.Aside.hide("#features");  });		
+				
+		
+		$("#change_language").click(function()	{	Lungo.View.Aside.hide("#features"); Lungo.Router.section("language");	});	
+		$("#back_sign_in_widget").click(function()	{		router_to_list(); Lungo.View.Aside.hide("#features"); 	});	
+		
+		$("#router_to_shipping_data").click(function()	{	open_pay_pal();	});				
+
+		
+	</script>
+
+    </body>
+</html>
+
