@@ -1,4 +1,17 @@
+function destroyObjects(){
+	
+	var parent = document.getElementById("list_gallery");
 
+	for ( var j=0; j < app.parkingMetersFromOrion.length; j++)	{	
+		var child = document.getElementById("friend_" + app.parkingMetersFromOrion[j].id );
+		parent.removeChild(child);
+	}
+	var child = document.getElementById("XXXXX" );
+	parent.removeChild(child);
+
+	delete app.parkingMetersFromOrion ;
+
+}
 
 function budget() {	
 	var price;
@@ -27,7 +40,7 @@ function budget() {
 
 function open_pay_pal(){
 	
-	Lungo.Router.article("step3","checkout");
+	alert( "the parking place is set as free");
 	
 	var jqxhr = $.post( 
 						"http://www.instaltic.com/php/process.php", 
@@ -44,7 +57,7 @@ function open_pay_pal(){
 								var URL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout-mobile&token=" + app.token ;
 
 								var ref = window.open(URL, '_blank', 'location=no');			
-
+							
 							
 								ref.addEventListener('loadstop', function(event) {        
 																				    if (event.url.match("mobile/close")) {
@@ -131,7 +144,7 @@ try{
 }
 
 	
-function router_to_widget (street2go)
+function router_to_widget (street2go,idParkingMeter)
 {  	
 	Lungo.Router.article("step3","widget");
 
@@ -139,7 +152,7 @@ function router_to_widget (street2go)
 	
 	calcRoute({ start : app.current_address , end : street2go });
 	
-	alert("Parking place is reserved for you on : \n" + street2go);
+	alert("Parking place is reserved for you on: \n" + street2go + "\n Paking place: " + idParkingMeter);
 	
 
 }
@@ -201,7 +214,7 @@ function router_to_list() {
 		{document.getElementById('list_gallery').innerHTML ='<li class="dark">	<strong >' +  "upss!! there is no empty spots" + '</strong>';}	
  
  		var newFriend = document.createElement('li');
-		newFriend.id = 'friend_0';			
+		newFriend.id = 'XXXXX';			
 		 
 		var newFriend_small = document.createElement('small');
 		newFriend_small.id = 'friend_small_0' ;
@@ -219,9 +232,9 @@ function router_to_list() {
 		if (app.parkingMetersFromOrion[i].status == google.maps.DistanceMatrixElementStatus.OK)
 		{
 		var newFriend = document.createElement('li');
-		newFriend.id = 'friend' + i;			
+		newFriend.id = 'friend_' + app.parkingMetersFromOrion[i].id ;
 		newFriend.setAttribute('class','thumb selectable arrow');
-		newFriend.setAttribute('onclick','router_to_widget('+ "'" + app.parkingMetersFromOrion[i].Address + "'" + ');' );
+		newFriend.setAttribute('onclick','router_to_widget('+ "'" + app.parkingMetersFromOrion[i].Address + "','" + app.parkingMetersFromOrion[i].id +  "');" );
 		
 		var newFriend_img = document.createElement('img');
 		newFriend_img.id = 'friend_img' + i;
@@ -259,6 +272,7 @@ function capture_sensor_data(){
 						    	var temp = list[j].position.split(",");					    	
 								parkingMetersFromOrionElement.lat = temp[0];
 								parkingMetersFromOrionElement.lon = temp[1];
+								parkingMetersFromOrionElement.id  = list[j].id;
 								parkingMetersFromOrionElement.numberOfFreePlaces = parseInt(list[j].freePlaces);
 								parkingMetersFromOrionElement.AlgorithmPriority = list[j].priority;
 								parkingMetersFromOrionElement.Address = "";

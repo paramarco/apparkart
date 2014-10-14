@@ -262,7 +262,10 @@
 				
 		
 		$("#change_language").click(function()	{	Lungo.View.Aside.hide("#features"); Lungo.Router.section("language");	});	
-		$("#back_sign_in_widget").click(function()	{		router_to_list(); Lungo.View.Aside.hide("#features"); 	});	
+		$("#back_sign_in_widget").click(function()	{		
+														destroyObjects();
+														app.receivedEvent();
+														Lungo.View.Aside.hide("#features"); 	});	
 		
 		$("#router_to_shipping_data").click(function()	{	open_pay_pal();	});				
 
