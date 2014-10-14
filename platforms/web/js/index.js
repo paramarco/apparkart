@@ -40,23 +40,21 @@ function open_pay_pal(){
 							
 	jqxhr.done(function(result) { 
 								
-								console.log( "DEBUG: devuelve SetExpressCheckout : " + decodeURIComponent(result) );
- 
 								app.token = decodeURIComponent(result);
 								var URL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout-mobile&token=" + app.token ;
 
 								var ref = window.open(URL, '_blank', 'location=no');
 								
 								//DEBUG llamada a API para encender luz
-								alert("llamada a encender luz");
+								alert("sets the parking place as free");
 							
 								ref.addEventListener('loadstop', function(event) {        
-																				    if (event.url.match("mobile/close")) {
-																				    	ref.close();
-																				        
-																				        
-																				    }
-																				});
+																    if (event.url.match("mobile/close")) {
+																    	ref.close();
+																        
+																        
+																    }
+																});
 								}
 				);
 	jqxhr.fail(function() { console.log( "DEBUG: error" ); });
@@ -71,7 +69,8 @@ try
 {
     app.current_lat = position.coords.latitude;
     app.current_long = position.coords.longitude;
- 
+    
+
  	var lat = parseFloat(position.coords.latitude);
   	var lng = parseFloat(position.coords.longitude);
 	var url2send = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' +lat  +"," + lng+ "&sensor=true";
@@ -86,9 +85,7 @@ try
 	    	if (result.results[1]) {	        
 		        
 		        app.current_address = result.results[0].formatted_address;	        
-		        
-		        console.log( "DEBUG: en onSuccess_Current" + app.current_address);
-		        
+
 		        capture_sensor_data();
 	     	}  
 	     } else {
@@ -97,7 +94,7 @@ try
 							
 	});	
 	geocoderXHR.fail(function(jqXHR, textStatus, errorString){
-		console.log("DEBUG:::onSuccess_Current hizo la llamada a geocoder correctamente ");	
+		console.log("DEBUG:::onSuccess_Current  ");	
 	
 	});
 	  	
@@ -113,7 +110,7 @@ catch(err)
 // onError Callback receives a PositionError object, navigator.geolocation.getCurrentPosition
 //
 function onError_Current(error) {
-    console.log('DEBUG: en onError_Current code: ' + error.code + ' message: ' + error.message + '\n');    
+    console.log('DEBUG: on onError_Current code: ' + error.code + ' message: ' + error.message + '\n');    
 }
 
 
@@ -125,41 +122,28 @@ try{
 	tus_options.maximumAge = 30000;
 	tus_options.timeout = 60000;
 
-	//navigator.geolocation.getCurrentPosition( onSuccess_Current , onError_Current, tus_options );
 	if(navigator.geolocation) {
 	    navigator.geolocation.getCurrentPosition(
 		    function(position) {				      	
 				      	onSuccess_Current (position);    
-				      }, 
+				      	}, 
 		    function() {  
 		    			console.log("DEBUG: upss process_address");
-	    				var position = { coords : {
-														  latitude : "28",
-														  longitude : "-15.35"
-														  }
-												 };
-					 	onSuccess_Current (position);
-					  }				  
+						alert("Browser doesn't support Geolocation");
+						}				  
 	    );
 	} else {	// Browser doesn't support Geolocation
-		var position = { coords : {
-								  	latitude : "28",
-									longitude : "-15.35"
-								  }
-					  };
-			onSuccess_Current (position );
-
+		console.log("DEBUG: upss process_address");
+		alert("Browser doesn't support Geolocation");
 		}
 	 }
 	catch(err)
 	 {
-	 	console.log("DEBUG: cazó el error dentro de process_address:  " + err.message + '\n');
+	 	console.log("DEBUG: catch  error process_address:  " + err.message + '\n');
 	 }	
 }
-
 	
 
-//Lungo.Router.article("step3","widget");
 function router_to_widget (street2go)
 {  	
 	Lungo.Router.article("step3","widget");
@@ -223,12 +207,12 @@ function get_address_name (indiceArray){
 
 function router_to_list() {
     var len = app.parkingMetersFromOrion.length;
-   //var len = app.parkingMetersOrdered.length;    
 	    
-	if (len > 0 )  
-		{document.getElementById('list_gallery').innerHTML ='<li class="dark">	<strong >' + "Choose one of the following empty spots, Apparkart tells you how to get there" + '</strong>';}
-	else
-		{document.getElementById('list_gallery').innerHTML ='<li class="dark">	<strong >' +  "upss!! there is no empty spots" + '</strong>';}	
+	if (len > 0 ){
+		document.getElementById('list_gallery').innerHTML ='<li class="dark">	<strong >' + "Choose one of the following empty spots, Apparkart tells you how to get there" + '</strong>';
+	} else 	{
+		document.getElementById('list_gallery').innerHTML ='<li class="dark">	<strong >' +  "upss!! there is no empty spots" + '</strong>';
+	}	
  
  		var newFriend = document.createElement('li');
 		newFriend.id = 'friend_0';			
@@ -247,13 +231,12 @@ function router_to_list() {
 		
     for (var i=0; i<len; i++){
 		if (app.parkingMetersFromOrion[i].status == google.maps.DistanceMatrixElementStatus.OK)
-		//if (app.parkingMetersOrdered[i].status == google.maps.DistanceMatrixElementStatus.OK)
 		{
 		var newFriend = document.createElement('li');
 		newFriend.id = 'friend' + i;			
 		newFriend.setAttribute('class','thumb selectable arrow');
 		newFriend.setAttribute('onclick','router_to_widget('+ "'" + app.parkingMetersFromOrion[i].Address + "'" + ');' );
-		//newFriend.setAttribute('onclick','router_to_widget('+ "'" + app.parkingMetersOrdered[i].Address + "'" + ');' );		
+			
 		var newFriend_img = document.createElement('img');
 		newFriend_img.id = 'friend_img' + i;
 		newFriend_img.src = "img/GoToIcon.jpg";
@@ -261,11 +244,11 @@ function router_to_list() {
 		var newFriend_small = document.createElement('small');
 		newFriend_small.id = 'friend_small' + i;
 		newFriend_small.innerHTML = "&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  "+ app.parkingMetersFromOrion[i].numberOfFreePlaces + " empty places " + app.parkingMetersFromOrion[i].Distance ;
-		//newFriend_small.innerHTML = "&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  "+ app.parkingMetersOrdered[i].numberOfFreePlaces + " empty places " + app.parkingMetersOrdered[i].Distance ;
+	
 		var newFriend_strong = document.createElement('strong');
 		newFriend_strong.id = 'friend_strong' + i;
 		newFriend_strong.innerHTML = app.parkingMetersFromOrion[i].Address;
-		//newFriend_strong.innerHTML = app.parkingMetersOrdered[i].Address;
+
 		document.getElementById('list_gallery').appendChild(newFriend);
 		document.getElementById(newFriend.id).appendChild(newFriend_img);
     	document.getElementById(newFriend.id).appendChild(newFriend_strong);
@@ -282,71 +265,33 @@ function router_to_list() {
 
 function capture_sensor_data(){
 
-/*	//send POST to server
-	var updateXHR = $.ajax({
-        url: 'http://127.0.0.1:8090',
-        type: 'POST',
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
-            xhr.setRequestHeader("Accept","application/json;");
-        },
-        data:  JSON.stringify(query2Server) ,
-        async: false, // syncronous
-		cache: false // does not use cache
-	});
+ var listOfParkings = fiwareDataAdapter.getParkingsInArea(app.current_lat,app.current_long,1000);
+ listOfParkings.done(function (list){
 
-	updateXHR.done(function(result){
-		
-		for ... {		
-			var parkingMetersFromOrionElement = new Object();
-			parkingMetersFromOrionElement.lat ="28";
-			parkingMetersFromOrionElement.lon ="-15.35";
-			parkingMetersFromOrionElement.numberOfFreePlaces = "3";
-			parkingMetersFromOrionElement.AlgorithmPriority = "4";
-			parkingMetersFromOrionElement.Address = "tomas del torrro";
-			parkingMetersFromOrionElement.Distance = "4";
-														
-																									
-			app.parkingMetersFromOrion.push(parkingMetersFromOrionElement);
-		}
-		
-		
-		
-		  	
-		calculateDistances();					
-	});	
-	updateXHR.fail(function(jqXHR, textStatus, errorString){		
-		
-	});
-	*/
-	calculateDistances();
-	
+						for ( var j=0; j < list.length; j++)	{									
+					    	var parkingMetersFromOrionElement = new Object();
+					    	var temp = list[j].position.split(",");					    	
+							parkingMetersFromOrionElement.lat = temp[0];
+							parkingMetersFromOrionElement.lon = temp[1];
+							parkingMetersFromOrionElement.numberOfFreePlaces = list[j].freePlaces;
+							parkingMetersFromOrionElement.AlgorithmPriority = list[j].priority;
+							parkingMetersFromOrionElement.Address = "";
+							parkingMetersFromOrionElement.Distance = "";																		
+																													
+							app.parkingMetersFromOrion.push(parkingMetersFromOrionElement);
+						}
+						
+						calculateDistances();						
+					});	
 }
 
-function calculateDistances(){
-
-
-	var parkingMetersFromOrionElement = new Object();
-	parkingMetersFromOrionElement.lat ="28";
-	parkingMetersFromOrionElement.lon ="-15.35";
-	parkingMetersFromOrionElement.numberOfFreePlaces = "3";
-	parkingMetersFromOrionElement.AlgorithmPriority = "4";
-	parkingMetersFromOrionElement.Address = "tomas del torrro";
-	parkingMetersFromOrionElement.Distance = "4";
-												
-																							
-	app.parkingMetersFromOrion.push(parkingMetersFromOrionElement);
-													
-													
+function calculateDistances(){										
 	
 	 var originsArray = Array();
 	 var destinationArray  = Array();
-		//for (j=0;j<app.parkingMetersFromOrion.length;j++)
 		originsArray[0] = new google.maps.LatLng(app.current_lat,app.current_long);
-		for (j=0;j<app.parkingMetersFromOrion.length;j++)
-		{									
-	    		destinationArray[j] = new google.maps.LatLng(app.parkingMetersFromOrion[j].lat, app.parkingMetersFromOrion[j].lon);
-	    		//originsArray[j] = new google.maps.LatLng(app.current_lat,app.current_long);    		
+		for (j=0;j<app.parkingMetersFromOrion.length;j++){									
+	    	destinationArray[j] = new google.maps.LatLng(app.parkingMetersFromOrion[j].lat, app.parkingMetersFromOrion[j].lon);
 	    }
 	
 
@@ -366,14 +311,14 @@ function calculateDistances(){
 
 function callbackCalculateDistances(response, status) {
   if (status != google.maps.DistanceMatrixStatus.OK) {
-    console.log('DEBUG: en callbackCalculateDistances Error was: ' + status);
+    console.log('DEBUG: in callbackCalculateDistances Error was: ' + status);
   } else {
     var origins = response.originAddresses;
     var destinations = response.destinationAddresses;
 
       for (var i = 0; i < destinations.length; i++) {      
 	     if (google.maps.DistanceMatrixElementStatus.OK != response.rows[0].elements[i].status) {
-	     	console.log( "DEBUG : en callbackCalculateDistances destinations:  " + google.maps.DistanceMatrixElementStatus.OK);          
+	     	console.log( "DEBUG : in callbackCalculateDistances destinations:  " + google.maps.DistanceMatrixElementStatus.OK);          
 	     }
 	     else{
 	           app.parkingMetersFromOrion[i].Distance =  response.rows[0].elements[i].distance.text ;
@@ -382,28 +327,21 @@ function callbackCalculateDistances(response, status) {
 	           app.parkingMetersFromOrion[i].status = google.maps.DistanceMatrixElementStatus.OK;
 	     }				
      }
-    //machinelearning();
+    machinelearning();
     router_to_list();
   }
 }
 
 function machinelearning()
-{
-			for(var j = app.parkingMetersFromOrion.length - 1; j >= 0; j--) {
-			   var min = 9999999;
-				var indexOfMin;
-				for (i=0;i<app.parkingMetersFromOrion.length;i++)
-				{
-					var aux = app.parkingMetersFromOrion[i].DistaceNum ;
-					if (aux < min)
-					{
-						min = aux;
-						indexOfMin = i;						
-					}
-				}
-				app.parkingMetersOrdered.push(app.parkingMetersFromOrion[indexOfMin]);
-				app.parkingMetersFromOrion.splice(indexOfMin, 1);
-			}			
+{	
+	app.parkingMetersFromOrion.sort(function (a, b) {
+									  if (a.DistaceNum < b.DistaceNum && a.AlgorithmPriority <= b.AlgorithmPriority ) {
+									    return -1;
+									  } else{
+									  	return 1;
+									  }	
+									  return 0;								  
+									});			
 }
 
 
@@ -416,25 +354,16 @@ var app = {
     // app atributtes
     
     currentPrice2pay : function() {},     
-    parkingMetersFromOrion: function() {},
-   
-    parkingMetersOrdered: function() {},
-
-    
-    current_mediaFile: function() {},
-    
-    current_time: function() {},
-    
+    parkingMetersFromOrion: function() {},    
+    current_mediaFile: function() {},    
+    current_time: function() {},    
     current_service_token: function() {},
-    var_address_parking : function() {},
-    
+    var_address_parking : function() {},    
     current_lat: function() {},
     current_long: function() {},
     current_address: function() {},
-    flag_go_to_gallery : function() {},
-    
+    flag_go_to_gallery : function() {},    
     token : function() {},    
-    
     get_current_time:  function() {
     	navigator.globalization.dateToString(
         new Date(),
@@ -443,8 +372,7 @@ var app = {
          {formatLength:'short', selector:'date and time'}
       );
      return app.current_time;	
-    }    , 
-       
+    },       
     current_selected_object_id :  function() {},
     
     // Bind Event Listeners
@@ -474,7 +402,6 @@ var app = {
     receivedEvent: function() {
        // Now safe to use the Cordova API
 		try{	
-			app.parkingMetersOrdered = new Array();
 			app.parkingMetersFromOrion =  new Array(); 			
 			
 			process_address();
@@ -486,7 +413,6 @@ var app = {
 	     }
 	     catch(err)
 	     {
-	     	console.log("DEBUG: captura el error dentro de receivedEvent:  " + err.message + '\n');
 	     }	
     }    
 };

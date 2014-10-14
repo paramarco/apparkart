@@ -13,7 +13,7 @@
   function initialize() {
 	
 	var myOptions = {
-      zoom: 12,
+      zoom: 16,
       center: new google.maps.LatLng(app.current_lat,app.current_long),
       mapTypeId: google.maps.MapTypeId.ROADMAP
       

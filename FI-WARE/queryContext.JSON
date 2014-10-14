@@ -1,9 +1,0 @@
-{
-    "entities": [
-        {
-            "type": "ParkingMeter",
-            "isPattern": "true",
-            "id": "ParkingMeter*"
-        }
-    ]
-}

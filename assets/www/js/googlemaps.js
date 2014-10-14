@@ -11,17 +11,15 @@
   geocoder = new google.maps.Geocoder();
   
   function initialize() {
-	 
-	//TODO  OJOJOJOJOJOJOJOJ que está definido para mapa de direcciones, hay que poner globitos
 	
-    var myOptions = {
-      zoom: 12,
-      center: new google.maps.LatLng("40.33333","-3.234324"),
+	var myOptions = {
+      zoom: 16,
+      center: new google.maps.LatLng(app.current_lat,app.current_long),
       mapTypeId: google.maps.MapTypeId.ROADMAP
       
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
+         
     directionsDisplay = new google.maps.DirectionsRenderer({
         'map': map,
         'preserveViewport': true,
@@ -40,17 +38,13 @@
 
     setUndoDisabled(true);
 
-    //calcRoute();
   }
 
   function calcRoute(route) {
 
 	var start = route.start;
 	var end = route.end;
-		  
-	  
-    console.log ("DEBUG: OJO !!! todo esto hay que cambiarlo para pasarlo a globos"  );
-    
+	
     var request = {
         origin:start,
         destination:end,
@@ -58,7 +52,7 @@
     };
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
+        directionsDisplay.setDirections(response);        
       }
     });
   }

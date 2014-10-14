@@ -1,22 +1,4 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 
 <html>
     <head>
@@ -30,57 +12,44 @@
 	    <link rel="stylesheet" href="css/theme.lungo.css">
 	    <link rel="stylesheet" type="text/css" href="css/index.css" /> 
           
-	     <!-- Cordova - Dependencies --> 
-		<script type="text/javascript" src="cordova-2.6.0.js"></script>
-        <script type="text/javascript" charset="utf-8" src="json2.js"></script>	    
+	     <!-- Cordova - Dependencies  -->
+		<script type="text/javascript" src="js/cordova-2.6.0.js"></script>
+
+        	    
 	    <!-- app - Dependencies -->
-	    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	    <script type="text/javascript" src="js/dictionary.js"></script>
 	    <script type="text/javascript" src="js/index.js"></script>	    
 	    <!-- Lungo - Dependencies -->
 		<script type="text/javascript" src="js/quo.js"></script>
 		<script type="text/javascript" src="js/lungo.js"></script>
-		<!-- Video Dependencies  -->
-		<script type="text/javascript" src="js/maps.googleapis.js"></script>
-		<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>-->
+	    <!-- Google - Dependencies  -->
+	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 		<script type="text/javascript" src="js/googlemaps.js"></script> 
+	    <script type="text/javascript" src="js/fiwareDataAdapter.js"></script>
 		
-		
-		<!--   Wallet for digital goods API 
-		<script src="https://sandbox.google.com/checkout/inapp/lib/buy.js"></script>
-		-->
-		
-	    
 	    <title> ApparKart </title>
     </head>
        
-	<body class="app" >
-		
+	<body class="app">		
 		<script type="text/javascript" charset="utf-8">
-			        	app.initialize();
-					</script>
+	    	app.initialize(); 
+	    	//by-passing event handling of Apache Cordova
+        	//$(document).ready(app.receivedEvent());
+
+		</script>
 		
 		<section id="main">
 			<article id="index_loading" class="active">	
-					  <!--<div class="div2" >
-					  	 <img  src="img/mario-kart.jpeg" width="100%" align="center"> 
-					  </div>	     --> 	
-		        	<div class="app_apache">
-		        		
-			     		<div id="deviceready" class="blink">
-			                <p class="event listening">loading </p>			           
-			            </div>
-			            <h1>ApparKart</h1>
-			        </div>  
-			        	      
+	        	<div class="app_apache">
+		     		<div id="deviceready" class="blink">
+		                <p class="event listening">loading </p>			           
+		            </div>
+		            <h1>ApparKart</h1>
+		        </div>  
 	       	</article>	 	
 		</section>		
-			
-	
 
-   		
-   	
-   		
    		<section id="step2" data-transition="slide"> 
 			<header data-title="Apparkart"> 
 				
@@ -90,16 +59,7 @@
 			</header>
 			<article id="gallery" class="active list indented scroll">
 		        <ul id="list_gallery">
-		           <!--
-		           	<li class="dark">
-			        	<strong >Choose a video of your Gallery.</strong>			                    
-					</li>
-		             <li class="thumb selectable arrow" data-image="img/cordova.png">
-		                <strong> recorded on : </strong>
-		                <small> 2013 / 03 / 12   </small>
-		            </li>
-		      		[...]
-		           -->
+		           
 		        </ul>
 		    </article>
 		   </section>
@@ -109,19 +69,19 @@
 	        <article class="active list">
 	            <ul>
 	                <li id="resume_options" class="current">
-	                		<br> 
-	                		<a href="#" data-icon="refresh" > &nbsp;  &nbsp;                     
-	                        <strong id="label_Resume_Options">Resume Options</strong>
-	                        </a>
-	                        <br>                    
-	                </li>
+                		<br> 
+                		<a href="#" data-icon="refresh" > &nbsp;  &nbsp;                     
+                        <strong id="label_Resume_Options">Resume Options</strong>
+                        </a>
+                        <br>                    
+                	</li>
 	                <li id="about_make_it">
-	                		<br>
-	                		<a href="#" data-icon="info" >&nbsp;  &nbsp;
-	                		<strong id="label_About_Make_it">Pay parking </strong>
-	                		</a>
-	                		<br>                      
-	                </li>
+                		<br>
+                		<a href="#" data-icon="info" >&nbsp;  &nbsp;
+                		<strong id="label_About_Make_it">Pay parking </strong>
+                		</a>
+                		<br>                      
+                	</li>
 	                <li id="change_language">
 	                		<br>
 	                		<a href="#" data-icon="chat" > &nbsp;  &nbsp;
@@ -201,7 +161,7 @@
 			            	 
 		               			<br><br>                	
 				                <strong id="price_label">Price:</strong>
-				                <strong id="price_amount">0€</strong>               
+				                <strong id="price_amount"></strong>               
 								<br>
 						</form>		
 								
