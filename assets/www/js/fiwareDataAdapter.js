@@ -7,34 +7,6 @@ var fiwareDataAdapter = (function () {
             ip = newIP;
        }
 
-       function processLampsData(data){
-             
-              var deferred = $.Deferred();
-              var results  = [];
-              var lamps    = data.contextResponses || [];
-
-              //process data
-                for(var i=0,n=lamps.length; i<n; i++) {
-                    
-                    var lampData  = lamps[i].contextElement;
-                    var cabinetID = parseInt(lampData.attributes[2].value);
-                    var lampID    = parseInt(lampData.id);
-
-                    if (!(cabinetID in results)) {
-                        results[cabinetID] = {};
-                    }
-
-                    results[cabinetID][lampID] = {
-                        id : lampID,
-                        luminosityLevel : lampData.attributes[0].value,
-                        position : lampData.attributes[1].value,
-                        electricalCabinetID : cabinetID
-                    };
-                }
-
-              deferred.resolve(results);
-              return deferred.promise();
-        }
        
         function processParkingsData(data){
             var deferred = $.Deferred();
@@ -50,8 +22,9 @@ var fiwareDataAdapter = (function () {
                 results[sensorID] = {
                   id         : sensorID,
                   freePlaces : parking.attributes[0].value,
-                  position   : parking.attributes[1].value,
-                  priority   : parking.attributes[2].value
+                  maxPlaces	 : parking.attributes[1].value,
+                  position   : parking.attributes[2].value,
+                  priority   : parking.attributes[3].value
                 };
             }
 

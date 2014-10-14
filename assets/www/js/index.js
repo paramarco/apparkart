@@ -43,8 +43,7 @@ function open_pay_pal(){
 								app.token = decodeURIComponent(result);
 								var URL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout-mobile&token=" + app.token ;
 
-								var ref = window.open(URL, '_blank', 'location=no');
-								
+								var ref = window.open(URL, '_blank', 'location=no');			
 
 							
 								ref.addEventListener('loadstop', function(event) {        
@@ -140,7 +139,7 @@ function router_to_widget (street2go)
 	
 	calcRoute({ start : app.current_address , end : street2go });
 	
-	//DEBUG llamada a apagar la luz
+	alert("Parking place is reserved for you on : \n" + street2go);
 	
 
 }
@@ -254,23 +253,27 @@ function capture_sensor_data(){
 
  var listOfParkings = fiwareDataAdapter.getParkingsInArea(app.current_lat,app.current_long,1000);
  listOfParkings.done(function (list){
-					
-						for (j=0;j<list.length;j++)	{									
-					    	var parkingMetersFromOrionElement = new Object();
-					    	var temp = list[j].position.split(",");					    	
-							parkingMetersFromOrionElement.lat = temp[0];
-							parkingMetersFromOrionElement.lon = temp[1];
-							parkingMetersFromOrionElement.numberOfFreePlaces = list[j].freePlaces;
-							parkingMetersFromOrionElement.AlgorithmPriority = list[j].priority;
-							parkingMetersFromOrionElement.Address = "";
-							parkingMetersFromOrionElement.Distance = "";
-																		
-																													
-							app.parkingMetersFromOrion.push(parkingMetersFromOrionElement);
+						for ( var j=0; j < list.length; j++)	{	
+							if (parseInt(list[j].freePlaces) > 0 ){
+								var parkingMetersFromOrionElement = new Object();
+						    	var temp = list[j].position.split(",");					    	
+								parkingMetersFromOrionElement.lat = temp[0];
+								parkingMetersFromOrionElement.lon = temp[1];
+								parkingMetersFromOrionElement.numberOfFreePlaces = parseInt(list[j].freePlaces);
+								parkingMetersFromOrionElement.AlgorithmPriority = list[j].priority;
+								parkingMetersFromOrionElement.Address = "";
+								parkingMetersFromOrionElement.Distance = "";																		
+																														
+								app.parkingMetersFromOrion.push(parkingMetersFromOrionElement);								
+							}
 						}
-						
-						calculateDistances();
-						
+						if (list.length > 0 ){
+							calculateDistances();	
+						}else{
+							alert("upps there is no parkingmeters around you ...1500 meters");
+						}
+
+
 					});	
 	
 }
@@ -373,12 +376,10 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     
-        //document.addEventListener('backbutton', tap_on_exit, false);
         document.addEventListener('menubutton', function(){Lungo.View.Aside.toggle("#features");} , false);
         document.addEventListener('searchbutton', function(){}, false);
         document.addEventListener('startcallbutton', tap_on_exit, false);
         document.addEventListener('endcallbutton', tap_on_exit, false);
-        //document.addEventListener("pause", tap_on_exit, false);
         
         document.addEventListener('backbutton', function(){ 	Lungo.View.Aside.hide("#features"); }, false);
     },
