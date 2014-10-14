@@ -20,10 +20,9 @@ function budget() {
             default :
                 console.log("DEBUG :: Unhandled budget :: ");
                 break;
-        }
-        
+        }        
         $('#price_amount').html(Math.floor(price) + "\u20AC");
-   	
+        app.currentPrice2pay = Math.floor(price);    	
 }
 
 function open_pay_pal(){
@@ -31,9 +30,9 @@ function open_pay_pal(){
 	Lungo.Router.article("step3","checkout");
 	
 	var jqxhr = $.post( 
-						"http://www.instaltic.com/process.php", 
+						"http://www.instaltic.com/php/process.php", 
 						{	
-							"amount":  	$('#price_amount').html(Math.floor(price))							
+							"amount":  app.currentPrice2pay 							
 						}							
 						, function() { }
 						, "text"
@@ -42,31 +41,34 @@ function open_pay_pal(){
 	jqxhr.done(function(result) { 
 								
 								console.log( "DEBUG: devuelve SetExpressCheckout : " + decodeURIComponent(result) );
-								
  
 								app.token = decodeURIComponent(result);
 								var URL = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout-mobile&token=" + app.token ;
 
 								var ref = window.open(URL, '_blank', 'location=no');
+								
+								//DEBUG llamada a API para encender luz
+								alert("llamada a encender luz");
 							
 								ref.addEventListener('loadstop', function(event) {        
 																				    if (event.url.match("mobile/close")) {
-																				        ref.close();
-																				        //aqui ir a otra pagina local
+																				    	ref.close();
+																				        
+																				        
 																				    }
 																				});
 								}
 				);
 	jqxhr.fail(function() { console.log( "DEBUG: error" ); });
-	jqxhr.always(function() { console.log( "DEBUG: complete paypal " );  });
+
 		
 }			
 
 // onSuccess Callback of navigator.geolocation.getCurrentPosition 
 //
 function onSuccess_Current(position) {
-	try
-	{
+try
+{
     app.current_lat = position.coords.latitude;
     app.current_long = position.coords.longitude;
  
@@ -100,11 +102,11 @@ function onSuccess_Current(position) {
 	});
 	  	
 	  	
-	  }
-	catch(err)
-	 {
-	 	console.log("DEBUG: captura el error dentro de onSuccess_Current:  " + err.message + '\n');
-	 }	
+}
+catch(err)
+ {
+ 	console.log("DEBUG: captura el error dentro de onSuccess_Current:  " + err.message + '\n');
+ }	
 	
 }
 //
@@ -155,96 +157,7 @@ try{
 	 }	
 }
 
-// Populate the database 
-//
-function createDB(tx) {
-	    
-    tx.executeSql('CREATE TABLE IF NOT EXISTS "PARKING_ADDRESS" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, "address", "numberOfEmptySpot")');
-}
-
-// Populate the database 
-    
-function insertDB(tx) {
-     tx.executeSql(
-         	'INSERT INTO PARKING_ADDRESS (address, numberOfEmptySpot ) VALUES ("' 
-         	+ app.current_mediaFile.address + '","' +  app.current_mediaFile.numberOfEmptySpot + '")' );
-}
-// Query the database
-//
-function queryDB(tx) {
-    tx.executeSql('SELECT * FROM PARKING_ADDRESS', [], querySuccess, errorCB);
-}
-
-// Query the success callback
-//
-function querySuccess(tx, results) {
-    var len = results.rows.length;
-    //console.log("DEBUG: DEMO table: " + len + " rows found.");
-
-	    
-	if (len > 0 )  
-		{document.getElementById('list_gallery').innerHTML ='<li class="dark">	<strong >' + "Choose one of the following empty spots, Apparkart tells you how to get there" + '</strong>';}
-	else
-		{document.getElementById('list_gallery').innerHTML ='<li class="dark">	<strong >' +  "upss!! there is no empty spots" + '</strong>';}	
- 
- 		var newFriend = document.createElement('li');
-		newFriend.id = 'friend_0';			
-		 
-		var newFriend_small = document.createElement('small');
-		newFriend_small.id = 'friend_small_0' ;
-		newFriend_small.innerHTML = "I detect your current location as: " ;
-		
-		var newFriend_strong = document.createElement('strong');
-		newFriend_strong.id = 'friend_strong_0';
-		newFriend_strong.innerHTML = app.current_address;
-		
-		document.getElementById('list_gallery').appendChild(newFriend);
-		document.getElementById(newFriend.id).appendChild(newFriend_small);
-		document.getElementById(newFriend.id).appendChild(newFriend_strong);
-		
-    for (var i=0; i<len; i++){
-		
-		var newFriend = document.createElement('li');
-		newFriend.id = 'friend' + i;			
-		newFriend.setAttribute('class','thumb selectable arrow');
-		newFriend.setAttribute('onclick','router_to_widget('+ "'" + results.rows.item(i).address + "'" + ');' );
-		
-		
-		var newFriend_img = document.createElement('img');
-		newFriend_img.id = 'friend_img' + i;
-		newFriend_img.src = "img/GoToIcon.jpg";
 	
-		var newFriend_small = document.createElement('small');
-		newFriend_small.id = 'friend_small' + i;
-		newFriend_small.innerHTML = "&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  "+ results.rows.item(i).numberOfEmptySpot + " empty places " ;
-		
-		var newFriend_strong = document.createElement('strong');
-		newFriend_strong.id = 'friend_strong' + i;
-		newFriend_strong.innerHTML = results.rows.item(i).address;
-		
-		
-		document.getElementById('list_gallery').appendChild(newFriend);
-		document.getElementById(newFriend.id).appendChild(newFriend_img);
-    	document.getElementById(newFriend.id).appendChild(newFriend_strong);
-		document.getElementById(newFriend.id).appendChild(newFriend_small);
-    	
-    }
-    
-    Lungo.Router.article("step2","gallery");
-			
-    
-}
-
-function router_to_gallery()
-{
-	var db2 = window.openDatabase("Apparkart_Database", "1.0", "Apparkart_Database", 200000);
-    db2.transaction(queryDB, function(){} ,errorCB);
-	//Lungo.Router.article("step2","gallery");		
-}
-
-
-
-		
 
 //Lungo.Router.article("step3","widget");
 function router_to_widget (street2go)
@@ -254,56 +167,15 @@ function router_to_widget (street2go)
 	initialize();
 	
 	calcRoute({ start : app.current_address , end : street2go });
+	
+	//DEBUG llamada a apagar la luz
+	
 
 }
 
-function query_for_retreive(tx)
-{
-	tx.executeSql('SELECT * FROM PARKING_ADDRESS WHERE id=' + app.current_selected_object_id, [], go_to_widget, errorCB);             
-}
 
 
-
-// Transaction error callback
-//
-function errorCB(err) {
-    console.log("DEBUG: entro por donde no debe: " + err.code);
-       if (app.flag_go_to_gallery == true )
-    {
-    	router_to_gallery();
-    }
-}
-  
-// Transaction success callback
-//
-function successCB() {
-    //var db = window.openDatabase("Apparkart_Database", "1.0", "Apparkart_Database", 200000);
-    //db.transaction(queryDB, errorCB);
-    if (app.flag_go_to_gallery == true )
-    {
-    	router_to_gallery();
-    	
-    }
-}
     
-
-function compra(){
-try
-{
-						 		 						
-						 		 						$('#price_amount').html("300€");
-						 		 						
-						 		 						
-	// Global InAppBrowser reference
-    var iabRef = window.open('http://www.instaltic.com/Bootstrap_make_it.php', '_system', 'location=no');
-
-}
-catch(err)
- {
- 	console.log("DEBUG: cazó el error dentro de process_address:  " + err.message + '\n');
- }	 
-   
-}
 
 
 function exitFromApp(buttonIndex) {	if (buttonIndex==2){  navigator.app.exitApp();	}}
@@ -541,7 +413,9 @@ var app = {
         this.bindEvents();
     },
     
-    // app atributtes    
+    // app atributtes
+    
+    currentPrice2pay : function() {},     
     parkingMetersFromOrion: function() {},
    
     parkingMetersOrdered: function() {},

@@ -2,7 +2,11 @@
 session_start();
 include_once("config_paypal.php");
 include_once("MyPayPal.php");
+header('Access-Control-Allow-Origin: *');
 
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
 
 if($_POST) //Post Data received from product list page.
 {
