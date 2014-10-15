@@ -43,7 +43,9 @@ function budget() {
 
 function open_pay_pal(){
 	
-	alert( "the parking place is set as free");
+	fiwareDataAdapter.releasePlace(app.currentParkingID);
+	
+	alert( "the parking place with id:" + app.currentParkingID  + " is set as free");
 		
 	var jqxhr = $.post( 
 						"http://www.instaltic.com/php/process.php", 
@@ -61,15 +63,6 @@ function open_pay_pal(){
 
 								var ref = window.open(URL, '_blank', 'location=no');
 								
-								//DEBUG llamada a API para encender luz
-							
-								ref.addEventListener('loadstop', function(event) {        
-																    if (event.url.match("mobile/close")) {
-																    	ref.close();
-																        
-																        
-																    }
-																});
 								}
 				);
 	jqxhr.fail(function() { console.log( "DEBUG: error" ); });
@@ -167,9 +160,9 @@ function router_to_widget (street2go,idParkingMeter)
 	
 	calcRoute({ start : app.current_address , end : street2go });
 	
-	//DEBUG llamada a apagar la luz
-	alert("Parking place is reserved for you on: \n" + street2go + "\n Paking place: " + idParkingMeter);
-	
+	fiwareDataAdapter.getPlace(idParkingMeter);
+	app.currentParkingID = idParkingMeter;
+	alert("Parking place is reserved for you on: \n" + street2go + "\n Paking place id: " + idParkingMeter);
 
 }
 
@@ -283,6 +276,7 @@ function capture_sensor_data(){
 
  var listOfParkings = fiwareDataAdapter.getParkingsInArea(app.current_lat,app.current_long,1000);
  listOfParkings.done(function (list){
+ 	 						console.log(JSON.stringify(list));
 
 						for ( var j=0; j < list.length; j++)	{	
 							if (parseInt(list[j].freePlaces) > 0 ){
@@ -375,7 +369,7 @@ var app = {
     },
     
     // app atributtes
-    
+    currentParkingID : function() {},
     currentPrice2pay : function() {},     
     parkingMetersFromOrion: function() {},    
     current_mediaFile: function() {},    

@@ -1,7 +1,7 @@
 "use strict";
 var fiwareDataAdapter = (function () {
  
-       var ip = "130.206.85.252:8080";
+       var ip = "130.206.82.170:8080";
        
        function setHost(newIP){
             ip = newIP;
@@ -32,37 +32,44 @@ var fiwareDataAdapter = (function () {
             return deferred.promise();
         }
 
-        function getParkings() {
-                return $.ajax({
-                   url: 'http://'+ip+'/NGSI10/contextEntityTypes/parking',
-                   type: 'GET',
-                   beforeSend: function(xhr) {
-                       xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
-                       xhr.setRequestHeader("Accept","application/json;");
-                   }}).then(processParkingsData); 
+
+		function getParkingsInArea(centerLatitude,centerLongitude,radius) {
+			return  $.ajax({
+	                  url: 'http://'+ip+'/parkings?centerLatitude='+centerLatitude+'&centerLongitude='+centerLongitude+'&radius='+radius,
+	                  type: 'GET',
+	                  beforeSend: function(xhr) {
+	                      xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+	                      xhr.setRequestHeader("Accept","application/json;");
+	                  }}).then(processParkingsData);
         }
         
+        function releasePlace(id) {
+           return  $.ajax({
+               url: 'http://'+ip+'/releasePlace/'+id,
+               type: 'POST',
+               beforeSend: function(xhr) {
+                   xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+                   xhr.setRequestHeader("Accept","application/json;");
+               }});
+       }
 
-        function getParkingsInArea(centerLatitude,centerLongitude,radius) {
+ 
+       function getPlace(id) {
+           return  $.ajax({
+               url: 'http://'+ip+'/getPlace/'+id,
+               type: 'POST',
+               beforeSend: function(xhr) {
+                   xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+                   xhr.setRequestHeader("Accept","application/json;");
+               }});
+       }
 
-                var data  = {"entities":[{"type":"parking","isPattern":"true","id":".*"}],"restriction":{"scopes":[{"type":"FIWARE_Location","value":{
-                  "circle":{"centerLatitude":centerLatitude,"centerLongitude":centerLongitude,"radius":radius}}}]}
-                };
-
-                return  $.ajax({
-                   url: 'http://'+ip+'/NGSI10/queryContext',
-                   type: 'POST',
-                   data: JSON.stringify(data),
-                   beforeSend: function(xhr) {
-                       xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
-                       xhr.setRequestHeader("Accept","application/json;");
-                   }}).then(processParkingsData); 
-        }
 
 
         return {
             setHost           : setHost,
-            getParkings       : getParkings,
+            releasePlace		:releasePlace,
+            getPlace			:getPlace,
             getParkingsInArea : getParkingsInArea
         };
  

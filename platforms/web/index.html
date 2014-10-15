@@ -257,7 +257,11 @@
 				        	        	
         										});
         Lungo.dom('#resume_options').tap(function(){	Lungo.View.Aside.hide("#features");	 });	
-		Lungo.dom('#back_sign_in_about').tap(function (){	Lungo.Router.back(); Lungo.View.Aside.hide("#features");  });
+		Lungo.dom('#back_sign_in_about').tap(function (){	
+															destroyObjects();
+															app.receivedEvent();
+															Lungo.View.Aside.hide("#features");  
+														});
 		Lungo.dom('#back_sign_in_language').tap(function (){	Lungo.Router.back(); Lungo.View.Aside.hide("#features");  });		
 				
 		

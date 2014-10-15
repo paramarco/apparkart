@@ -40,8 +40,10 @@ function budget() {
 
 function open_pay_pal(){
 	
-	alert( "the parking place is set as free");
+	fiwareDataAdapter.releasePlace(app.currentParkingID);
 	
+	alert( "the parking place with id:" + app.currentParkingID  + " is set as free");
+		
 	var jqxhr = $.post( 
 						"http://www.instaltic.com/php/process.php", 
 						{	
@@ -61,10 +63,7 @@ function open_pay_pal(){
 							
 								ref.addEventListener('loadstop', function(event) {        
 																				    if (event.url.match("mobile/close")) {
-																				    	
-																				        //DEBUG llamada a API para encender luz
-																				        alert("set the parking place as free");
-																				        ref.close();
+																				    	ref.close();
 																				    }
 																				});
 								}
@@ -152,7 +151,9 @@ function router_to_widget (street2go,idParkingMeter)
 	
 	calcRoute({ start : app.current_address , end : street2go });
 	
-	alert("Parking place is reserved for you on: \n" + street2go + "\n Paking place: " + idParkingMeter);
+	app.currentParkingID = idParkingMeter;
+	alert("Parking place is reserved for you on: \n" + street2go + "\n Paking place id: " + idParkingMeter);
+
 	
 
 }
@@ -360,7 +361,7 @@ var app = {
     },
     
     // app atributtes
-    
+	currentParkingID : function() {},
     currentPrice2pay : function() {},     
     parkingMetersFromOrion: function() {},    
     current_mediaFile: function() {},    

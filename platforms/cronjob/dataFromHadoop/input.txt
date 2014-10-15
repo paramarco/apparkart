@@ -1,0 +1,12 @@
+{"recvTimeTs":"1413386403","recvTime":"2014-10-15T17:20:03.361","entityId":"0","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"3","attrMd":[]}
+{"recvTimeTs":"1413386487","recvTime":"2014-10-15T17:21:27.004","entityId":"0","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"2","attrMd":[]}
+{"recvTimeTs":"1413386535","recvTime":"2014-10-15T17:22:15.413","entityId":"0","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"1","attrMd":[]}
+{"recvTimeTs":"1413386396","recvTime":"2014-10-15T17:19:56.386","entityId":"0","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"4","attrMd":[]}
+{"recvTimeTs":"1413386396","recvTime":"2014-10-15T17:19:56.386","entityId":"1","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"5","attrMd":[]}
+{"recvTimeTs":"1413386396","recvTime":"2014-10-15T17:19:56.386","entityId":"2","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"5","attrMd":[]}
+{"recvTimeTs":"1413386396","recvTime":"2014-10-15T17:19:56.386","entityId":"3","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"10","attrMd":[]}
+{"recvTimeTs":"1413386495","recvTime":"2014-10-15T17:21:35.754","entityId":"1","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"4","attrMd":[]}
+{"recvTimeTs":"1413386411","recvTime":"2014-10-15T17:20:11.669","entityId":"2","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"4","attrMd":[]}
+{"recvTimeTs":"1413386418","recvTime":"2014-10-15T17:20:18.727","entityId":"3","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"9","attrMd":[]}
+{"recvTimeTs":"1413386513","recvTime":"2014-10-15T17:21:53.599","entityId":"3","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"8","attrMd":[]}
+{"recvTimeTs":"1413386524","recvTime":"2014-10-15T17:22:04.622","entityId":"3","entityType":"parking","attrName":"freePlaces","attrType":"number","attrValue":"7","attrMd":[]}
