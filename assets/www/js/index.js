@@ -151,11 +151,9 @@ function router_to_widget (street2go,idParkingMeter)
 	
 	calcRoute({ start : app.current_address , end : street2go });
 	
+	fiwareDataAdapter.getPlace(idParkingMeter);
 	app.currentParkingID = idParkingMeter;
 	alert("Parking place is reserved for you on: \n" + street2go + "\n Paking place id: " + idParkingMeter);
-
-	
-
 }
 
 

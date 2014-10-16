@@ -276,8 +276,6 @@ function capture_sensor_data(){
 
  var listOfParkings = fiwareDataAdapter.getParkingsInArea(app.current_lat,app.current_long,1000);
  listOfParkings.done(function (list){
- 	 						console.log(JSON.stringify(list));
-
 						for ( var j=0; j < list.length; j++)	{	
 							if (parseInt(list[j].freePlaces) > 0 ){
 								var parkingMetersFromOrionElement = new Object();
