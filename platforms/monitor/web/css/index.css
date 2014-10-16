@@ -1,0 +1,93 @@
+/* Portrait layout (default) */
+.app_apache {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:240px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */  
+                                   /* offset horizontal: half of text area width */
+	}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app_apache {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+
+.flota {float:right;}
+.mueve {}
+
+.link_fade_effect{		
+		position:relative;
+		left: 95%;
+		bottom: 65%; }
+.blink_link_to_camera {
+    animation:fade 2000ms infinite;
+    -webkit-animation:fade 2000ms infinite;
+    		position:relative;
+		left: 75%;
+		bottom: 65%;
+}
+
+/* main section */
+.logo{margin:15px 0;text-align: center;}
+.listaComandos {background:white;padding:15px 0;margin:20px 0;text-align:center;}
+.listaComandos button{margin:15px 5px;}
+.monitorButton {background:#FFFFFF;border: 1px solid #AFAFAF;cursor: pointer;margin: 0 10px;padding: 10px;}
+.monitorButton:after {content:"\f061"; font-family: 'lungojsicon';font-weight: normal !important; margin: 0 10px;}
+.select,option {padding: 0 10px;}
+.back{padding-left: 10px;}
+.back .text{font-size: 25px;padding-left: 10px;}
+
+/* map section */
+html, body, #map-canvas {height: 100%;margin: 0px;padding: 0px;}
+#map-canvas{position:absolute;}
+.bubble{overflow:hidden;white-space:nowrap;padding:5px 10px; line-height: 15px;}
+.bubble .info{margin-top: 10px;}
+.controls {margin-top: 16px;margin-left: 4px;border: 1px solid transparent;border-radius: 2px;box-sizing: border-box;-moz-box-sizing: border-box;height:30px;outline: none;cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);color: #000;background-color: #fff;padding: 5px 11px 0px 11px;width: 40px;font-family: Roboto;font-size: 15px;font-weight: 300;text-align: center;}
+.controls.active {color: #fff;background-color: #4d90fe;}
+.luminosityRange{width: auto !important; float: left;}
+.luminosityValue{float:left;margin:5px 0 0 10px;}
+
+
+        

@@ -27,7 +27,7 @@ function sendUpdate2Broker (indexOfParkingMeter ,priority){
 	
 	var contentTypeRequest = $.ajax({
 			url: 'http://'+ip+'/parkings/'+indexOfParkingMeter+'',
-            type: 'POST',
+            type: 'PUT',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
                 xhr.setRequestHeader("Accept","application/json;");

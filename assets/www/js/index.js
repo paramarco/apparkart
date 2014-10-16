@@ -245,7 +245,7 @@ function router_to_list() {
 		
 		var newFriend_strong = document.createElement('strong');
 		newFriend_strong.id = 'friend_strong' + i;
-		newFriend_strong.innerHTML = app.parkingMetersFromOrion[i].Address;
+		newFriend_strong.innerHTML = app.parkingMetersFromOrion[i].Address + ", Parking ID : " + app.parkingMetersFromOrion[i].id;
 		
 		document.getElementById('list_gallery').appendChild(newFriend);
 		document.getElementById(newFriend.id).appendChild(newFriend_img);

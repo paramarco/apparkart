@@ -256,7 +256,7 @@ function router_to_list() {
 	
 		var newFriend_strong = document.createElement('strong');
 		newFriend_strong.id = 'friend_strong' + app.parkingMetersFromOrion[i].id ;
-		newFriend_strong.innerHTML = app.parkingMetersFromOrion[i].Address;
+		newFriend_strong.innerHTML = app.parkingMetersFromOrion[i].Address + ", Parking ID : " + app.parkingMetersFromOrion[i].id;
 
 		document.getElementById('list_gallery').appendChild(newFriend);
 		document.getElementById(newFriend.id).appendChild(newFriend_img);
@@ -276,6 +276,7 @@ function capture_sensor_data(){
 
  var listOfParkings = fiwareDataAdapter.getParkingsInArea(app.current_lat,app.current_long,1000);
  listOfParkings.done(function (list){
+ 						console.log(JSON.stringify(list));
 						for ( var j=0; j < list.length; j++)	{	
 							if (parseInt(list[j].freePlaces) > 0 ){
 								var parkingMetersFromOrionElement = new Object();
