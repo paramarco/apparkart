@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<devices>
+	<developer id="10" name="instaltic">
+		<dev id="1" name="test" label="12"/>
+	</developer>
+</devices>

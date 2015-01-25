@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<device>
+  <developer>instaltic</developer>
+  <product>light</product>
+  <pwrdownmode>false</pwrdownmode>
+  <regular>
+    <reg name="Light" id="11">
+      <endpoint name="light" type="num" dir="inp">
+        <size>4</size>
+        <units>
+          <unit name="Lux" factor="1" offset="0"/>
+        </units>
+      </endpoint>
+    </reg>
+  </regular>
+</device>

@@ -1,7 +1,8 @@
 "use strict";
 var fiwareDataAdapter = (function () {
  
-       var ip = "130.206.82.170:8080";
+       //var ip = "130.206.82.170:8080";
+       var ip = "217.127.199.47:58080";
        
        function setHost(newIP){
             ip = newIP;

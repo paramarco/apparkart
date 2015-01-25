@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<device>
+	<developer>instaltic</developer>
+	<product>test</product>
+	<pwrdownmode>false</pwrdownmode>
+	<config>
+		<reg name="sadas" id="11">
+		</reg>
+	</config>
+	<regular>
+		<reg name="dasdas" id="12">
+		</reg>
+	</regular>
+</device>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<device>
+  <developer>instaltic</developer>
+  <product>PWM output module</product>
+  <pwrdownmode>false</pwrdownmode>
+  <regular>
+    <reg name="PWM output 0" id="11">
+      <endpoint name="PWM output 0" type="num" dir="out"/>
+    </reg>
+  </regular>
+</device>
+

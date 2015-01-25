@@ -1,5 +1,6 @@
 var restify = require('restify');
-var fiwareIP = "130.206.82.170:1026";
+//var fiwareIP = "130.206.82.170:1026";
+var fiwareIP = "217.127.199.47:1026";
 
 var log4js     = require('log4js'),
     logger     = log4js.getLogger();
@@ -159,8 +160,8 @@ function getParkingsInArea(centerLatitude,centerLongitude,radius) {
 }
 
  
-server.listen(8080, function() {
-    logger.info('REST API on port 8080');
+server.listen(58080, function() {
+    logger.info('REST API on port 58080');
 });
 
 //websocket Server notify
@@ -185,6 +186,6 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-webSocketServer.listen(8090, function(){
-  logger.info('Socket server on port 8090');
+webSocketServer.listen(58090, function(){
+  logger.info('Socket server on port 58090');
 });

@@ -142,10 +142,12 @@ try{
 	 }	
 }
 
+//commented out to do it native		
+//function router_to_widget (street2go,idParkingMeter)
+function router_to_widget (lat,lon,idParkingMeter)
+{ 
 	
-function router_to_widget (street2go,idParkingMeter)
-{  	
-	Lungo.Router.article("step3","widget");
+/*	Lungo.Router.article("step3","widget");
 
 	initialize();
 	
@@ -154,6 +156,9 @@ function router_to_widget (street2go,idParkingMeter)
 	fiwareDataAdapter.getPlace(idParkingMeter);
 	app.currentParkingID = idParkingMeter;
 	alert("Parking place is reserved for you on: \n" + street2go + "\n Paking place id: " + idParkingMeter);
+
+*/
+cordova.require('cordova/plugin/phonenavigator').doNavigate(lat, lon, function(){}, function(){alert("no hay navegador instalado...");});
 }
 
 
@@ -233,8 +238,8 @@ function router_to_list() {
 		var newFriend = document.createElement('li');
 		newFriend.id = 'friend_' + app.parkingMetersFromOrion[i].id ;
 		newFriend.setAttribute('class','thumb selectable arrow');
-		newFriend.setAttribute('onclick','router_to_widget('+ "'" + app.parkingMetersFromOrion[i].Address + "','" + app.parkingMetersFromOrion[i].id +  "');" );
-		
+//		newFriend.setAttribute('onclick','router_to_widget('+ "'" + app.parkingMetersFromOrion[i].Address + "','" + app.parkingMetersFromOrion[i].id +  "');" );
+		newFriend.setAttribute('onclick','router_to_widget('+ "'" + app.parkingMetersFromOrion[i].lat + "','"  + app.parkingMetersFromOrion[i].lon + "','" + app.parkingMetersFromOrion[i].id +  "');" );
 		var newFriend_img = document.createElement('img');
 		newFriend_img.id = 'friend_img' + i;
 		newFriend_img.src = "img/GoToIcon.jpg";
@@ -263,7 +268,7 @@ function router_to_list() {
 
 function capture_sensor_data(){
 
- var listOfParkings = fiwareDataAdapter.getParkingsInArea(app.current_lat,app.current_long,1000);
+ var listOfParkings = fiwareDataAdapter.getParkingsInArea(app.current_lat,app.current_long,10000000);
  listOfParkings.done(function (list){
 						for ( var j=0; j < list.length; j++)	{	
 							if (parseInt(list[j].freePlaces) > 0 ){

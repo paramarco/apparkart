@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<devices>
+  <developer id="10" name="instaltic">
+    <dev id="1" name="tempHum" label="Temperature/Humidity module"/>
+    <dev id="2" name="pwm" label="PWM controller"/>
+    <dev id="3" name="light" label="Light module"/>
+    <dev id="4" name="tempHumLight" label="Temperature/Humidity/Light module"/>
+  </developer>
+</devices>

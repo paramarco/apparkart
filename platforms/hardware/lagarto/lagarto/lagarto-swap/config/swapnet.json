@@ -1,0 +1,133 @@
+{
+  "network": {
+    "name": "SWAP", 
+    "motes": [
+      {
+        "registers": [
+          {
+            "endpoints": [
+              {
+                "direction": "out", 
+                "name": "PWM_output_0", 
+                "timestamp": "16 Oct 2014 12:08:52", 
+                "value": "0", 
+                "location": "SWAP", 
+                "type": "num", 
+                "id": "1.11.0"
+              }
+            ], 
+            "id": 11, 
+            "name": "PWM output 0"
+          }
+        ], 
+        "pcode": "0000000A00000002", 
+        "address": 1, 
+        "name": "PWM output module", 
+        "manufacturer": "instaltic"
+      }, 
+      {
+        "registers": [
+          {
+            "endpoints": [
+              {
+                "direction": "out", 
+                "name": "PWM_output_0", 
+                "timestamp": "16 Oct 2014 10:51:51", 
+                "value": "0", 
+                "location": "SWAP", 
+                "type": "num", 
+                "id": "2.11.0"
+              }
+            ], 
+            "id": 11, 
+            "name": "PWM output 0"
+          }
+        ], 
+        "pcode": "0000000A00000002", 
+        "address": 2, 
+        "name": "PWM output module", 
+        "manufacturer": "instaltic"
+      }, 
+      {
+        "registers": [
+          {
+            "endpoints": [
+              {
+                "direction": "inp", 
+                "name": "Voltage", 
+                "timestamp": "16 Oct 2014 10:51:51", 
+                "value": "0.0", 
+                "location": "SWAP", 
+                "units": [
+                  "V"
+                ], 
+                "type": "num", 
+                "id": "250.11.0", 
+                "unit": "V"
+              }
+            ], 
+            "id": 11, 
+            "name": "Voltage supply"
+          }, 
+          {
+            "endpoints": [
+              {
+                "direction": "inp", 
+                "name": "Temperature", 
+                "timestamp": "16 Oct 2014 10:51:51", 
+                "value": "0.0", 
+                "location": "SWAP", 
+                "units": [
+                  "C", 
+                  "F", 
+                  "K"
+                ], 
+                "type": "num", 
+                "id": "250.12.0", 
+                "unit": "C"
+              }, 
+              {
+                "direction": "inp", 
+                "name": "Humidity", 
+                "timestamp": "16 Oct 2014 10:51:51", 
+                "value": "0.0", 
+                "location": "SWAP", 
+                "units": [
+                  "%"
+                ], 
+                "type": "num", 
+                "id": "250.12.1", 
+                "unit": "%"
+              }
+            ], 
+            "id": 12, 
+            "name": "Humidity and Temperature"
+          }, 
+          {
+            "endpoints": [
+              {
+                "direction": "inp", 
+                "name": "light", 
+                "timestamp": "16 Oct 2014 10:51:51", 
+                "value": "0", 
+                "location": "SWAP", 
+                "units": [
+                  "Lux"
+                ], 
+                "type": "num", 
+                "id": "250.13.0", 
+                "unit": "Lux"
+              }
+            ], 
+            "id": 13, 
+            "name": "Light"
+          }
+        ], 
+        "pcode": "0000000A00000004", 
+        "address": 250, 
+        "name": "Temperature/Humidity/Light module", 
+        "manufacturer": "instaltic"
+      }
+    ]
+  }
+}
