@@ -1,0 +1,181 @@
+POST
+http://217.127.199.47:1026/NGSI10/updateContext
+header 'Content-Type: application/json' 
+header 'Accept: application/json' 
+
+
+
+{
+  "contextElements" : [                        
+    {
+        "type" : "parking",
+        "isPattern" : "false",
+        "id" : "0",
+        "attributes" : [
+          {
+            "name" : "freePlaces",
+            "type" : "number",
+            "value" : "4"
+          },
+          {
+            "name" : "maxPlaces",
+            "type" : "number",
+            "value" : "10"
+          },
+          {
+            "name" : "position",
+            "type" : "coords",
+            "value" : "40.418889,-3.691944",
+            "metadatas" : [
+              {
+                "name" : "location",
+                "type" : "string",
+                "value" : "WSG84"
+              }
+            ]
+          },
+          {
+            "name" : "priority",
+            "type" : "number",
+            "value" : "3"
+          }
+]  
+}                   
+] , 
+  "updateAction": "APPEND"
+}
+
+
+
+###############################################
+###############################################
+
+
+{
+  "contextElements" : [                        
+    {
+        "type" : "parking",
+        "isPattern" : "false",
+        "id" : "1",
+        "attributes" : [
+          {
+            "name" : "freePlaces",
+            "type" : "number",
+            "value" : "4"
+          },
+          {
+            "name" : "maxPlaces",
+            "type" : "number",
+            "value" : "10"
+          },
+          {
+            "name" : "position",
+            "type" : "coords",
+            "value" : "40.4215359,-3.688221",
+            "metadatas" : [
+              {
+                "name" : "location",
+                "type" : "string",
+                "value" : "WSG84"
+              }
+            ]
+          },
+          {
+            "name" : "priority",
+            "type" : "number",
+            "value" : "3"
+          }
+]  
+}                   
+] , 
+  "updateAction": "APPEND"
+}
+
+###############################################
+###############################################
+
+
+{
+  "contextElements" : [                        
+    {
+        "type" : "parking",
+        "isPattern" : "false",
+        "id" : "2",
+        "attributes" : [
+          {
+            "name" : "freePlaces",
+            "type" : "number",
+            "value" : "1"
+          },
+          {
+            "name" : "maxPlaces",
+            "type" : "number",
+            "value" : "10"
+          },
+          {
+            "name" : "position",
+            "type" : "coords",
+            "value" : "40.4212564,-3.7024931",
+            "metadatas" : [
+              {
+                "name" : "location",
+                "type" : "string",
+                "value" : "WSG84"
+              }
+            ]
+          },
+          {
+            "name" : "priority",
+            "type" : "number",
+            "value" : "3"
+          }
+]  
+}                   
+] , 
+  "updateAction": "APPEND"
+}
+
+
+###############################################
+###############################################
+
+
+{
+  "contextElements" : [                        
+    {
+        "type" : "parking",
+        "isPattern" : "false",
+        "id" : "3",
+        "attributes" : [
+          {
+            "name" : "freePlaces",
+            "type" : "number",
+            "value" : "2"
+          },
+          {
+            "name" : "maxPlaces",
+            "type" : "number",
+            "value" : "10"
+          },
+          {
+            "name" : "position",
+            "type" : "coords",
+            "value" : "40.4184823,-3.7040545",
+            "metadatas" : [
+              {
+                "name" : "location",
+                "type" : "string",
+                "value" : "WSG84"
+              }
+            ]
+          },
+          {
+            "name" : "priority",
+            "type" : "number",
+            "value" : "1"
+          }
+]  
+}                   
+] , 
+  "updateAction": "APPEND"
+}
